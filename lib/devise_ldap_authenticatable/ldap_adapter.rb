@@ -151,8 +151,8 @@ module Devise
       
       private
       
-      def self.admin
-        ldap = LdapConnect.new(:admin => true).ldap
+      def self.admin(admin = ::Devise.ldap_use_admin_to_bind)
+        ldap = LdapConnect.new(:admin => admin).ldap
         
         unless ldap.bind
           DeviseLdapAuthenticatable::Logger.send("Cannot bind to admin LDAP user")
